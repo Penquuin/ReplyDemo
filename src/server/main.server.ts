@@ -19,7 +19,7 @@ ServerStore.Dispatch({ type: "InitializeServer" });
 //Everything below this comment is a test.
 while (true) {
 	ServerStore.Dispatch({ type: "_OnSharedDispatched", Action: { type: "AddGlass" } });
-	wait(1);
+	wait(0.2);
 	ServerStore.Dispatch({ type: "_OnSharedDispatched", Action: { type: "DrinkWater" } });
-	wait(1);
+	wait(0.2);
 }

@@ -17,6 +17,7 @@ export class EventDisplayer extends Component<{}, IState> {
 	private ref: Ref<ScrollingFrame>;
 	private currentState: Binding<TEnhancement<IClientState, ISharedState>>;
 	private updateCS: (v: TEnhancement<IClientState, ISharedState>) => void;
+	private layoutID = 0;
 	constructor() {
 		super({});
 		this.ref = createRef<ScrollingFrame>();
@@ -25,12 +26,17 @@ export class EventDisplayer extends Component<{}, IState> {
 		[this.currentState, this.updateCS] = Roact.createBinding({ Cookies: 0, _Shared: { Water: 0 } });
 		this.con = ClientStore.Changed.Connect((action, newstate) => {
 			this.updateCS(newstate);
+			this.layoutID++;
 			const g = { ...this.state };
-			const lo = g.BigLogs.size();
 			if (action.type === "_OnSharedDispatched") {
-				g.BigLogs.push(<OneEvent Prefix={"DISPATCH"} ActionType={action.Action.type} LayoutOrder={lo} />);
+				g.BigLogs.push(
+					<OneEvent Prefix={"DISPATCH"} ActionType={action.Action.type} LayoutOrder={this.layoutID} />,
+				);
 			} else {
-				g.BigLogs.push(<OneEvent Prefix={"CLIENT"} ActionType={action.type} LayoutOrder={lo} />);
+				g.BigLogs.push(<OneEvent Prefix={"CLIENT"} ActionType={action.type} LayoutOrder={this.layoutID} />);
+			}
+			if (g.BigLogs.size() > 100) {
+				g.BigLogs.clear();
 			}
 			this.setState(g);
 		});
