@@ -3,9 +3,13 @@ import { RokuxRemotes } from "shared/rokux-remotes";
 import { EventDisplayer } from "./components/event-displayer";
 import { ClientStore } from "./rokux/client-store";
 
+//Rendering UI
 Roact.mount(Roact.createElement(EventDisplayer));
 
+//Initialize Client Store
 ClientStore.Dispatch({ type: "InitializeClient" });
+
+//Typical way to fetch _Shared
 RokuxRemotes.Client.Get("FetchSharedData")
 	.CallServerAsync()
 	.then((v) => {

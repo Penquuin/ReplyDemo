@@ -5,9 +5,11 @@ import { SharedDefaultState, SharedReducer } from "shared/rokux/shared-reducer";
 import { ServerDefaultState, ServerReducer } from "./server-reducer";
 import { IServerState, TServerActions } from "./server-types";
 
+// Creating RbxNet remotes
 const OnSharedDispatched = RokuxRemotes.Server.Create("OnSharedDispatched");
 const FetchSharedData = RokuxRemotes.Server.Create("FetchSharedData");
 
+// Store Declaration
 const ServerStore = Reply.CreateServerStore<IServerState, TServerActions, ISharedState, TSharedActions>(
 	ServerReducer,
 	SharedReducer,
