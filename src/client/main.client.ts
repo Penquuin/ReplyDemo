@@ -26,3 +26,17 @@ ClientStore.Changed.Connect((action, newstate) => {
 	}
 	print("<CLIENT> " + action.type);
 });
+
+//Tests
+while (true) {
+	for (let i = 0; i < 5; i++) {
+		ClientStore.Dispatch({ type: "BakeClientCookie" });
+		wait(0.5);
+	}
+	wait(1);
+	for (let i = 0; i < 4; i++) {
+		ClientStore.Dispatch({ type: "EatClientCookie" });
+		wait(0.5);
+	}
+	wait(1);
+}
