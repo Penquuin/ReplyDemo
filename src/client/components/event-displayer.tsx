@@ -78,14 +78,14 @@ export class EventDisplayer extends Component<{}, IState> {
 					<textlabel
 						BackgroundColor3={new Color3(1, 1, 1)}
 						Position={new UDim2(0.7, -10, 0, 10)}
-						Size={new UDim2(0.4, 0, 0.3, 0)}
+						Size={new UDim2(0.4, 0, 0, 40)}
 						BorderSizePixel={0}
 						AnchorPoint={new Vector2(1, 0)}
 						Text={this.currentState.map((v) => {
 							return `Client: { Cookies:${v.Cookies} }\n_Shared: { Water:${v._Shared.Water} }`;
 						})}
 						Font={Enum.Font.SourceSansBold}
-						TextSize={24}
+						TextScaled={true}
 					/>
 				</screengui>
 			</Portal>
